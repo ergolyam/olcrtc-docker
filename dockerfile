@@ -13,6 +13,7 @@ RUN go build -trimpath -ldflags="-s" -o /app/ ./cmd/... && \
 FROM docker.io/busybox:stable-uclibc AS main
 
 COPY --from=builder /app/ /usr/local/bin/
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 ENTRYPOINT [ "/usr/local/bin/olcrtc" ]
 
